@@ -1,4 +1,10 @@
 <?PHP
+/*
+ * Copyright Hugh Fuve 2014
+ * MIT Licence.
+ *
+ *
+ */
 
 include_once("states.php");
 
