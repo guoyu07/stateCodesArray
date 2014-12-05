@@ -8,3 +8,5 @@ PHP class to convert ascii US state codes in a string into their full text names
   
   getStateXX($strCode); //returns the full text of a 2 letter state code.
   
+  
+This version uses a private array inside the class.
