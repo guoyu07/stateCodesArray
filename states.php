@@ -2,8 +2,10 @@
 /*
  * Copyright Hugh Fuve 2014
  * MIT Licence.
- * getState($code);   //returns a string with the full name of the state given a code
- * getStateXX($code);   //returns a string with the full name of the state given a 2 letter code or XX on fail.
+ * $states = new stateClass();
+ *
+ * $states->getState($code);   //returns a string with the full name of the state given a code
+ * $states->getStateXX($code);   //returns a string with the full name of the state given a 2 letter code or XX on fail.
  */
 
 
@@ -277,11 +279,11 @@ class stateClass
          $this->states['TT']='Trust Territory Pacific Islands';
     }
 
-    function getState($code){
+    function findStateNameByCode($code){
         return $this->states[$code];
     }
 
-    function getStateXX($code){
+    function findStateNameByXXCode($code){     //find the US state name by two letter code.
         $USCode="US-".$code;
         if($this->states[$USCode]!=""){
             return $this->states[$USCode];
@@ -290,4 +292,14 @@ class stateClass
         }
     }
 
+    public function cleanCode($code){     //strips double spaces and []()tabs and linefeeds
+        $code=trim(str_replace("'","",$code));
+        $code=str_replace('"',"",$code);
+        $code=str_replace('(',"",$code);
+        $code=str_replace(')',"",$code);
+        $code=str_replace('[',"",$code);
+        $code=str_replace(']',"",$code);
+
+        return preg_replace(array('/\s{2,}/', '/[\t\n\r]/'), ' ', $code);
+    }
 }
