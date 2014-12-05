@@ -6,9 +6,13 @@
  *
  */
 
+//include_once("includes/config.inc");
+//include_once("includes/db_lib.inc");
+//include_once("includes/inc.inc");
 include_once("states.php");
 
-class regionsClass extends stateClass
+
+class regionsClass extends statesClass
 {
     private static $citys = array();
     private static $regions = array();
@@ -7213,18 +7217,13 @@ class regionsClass extends stateClass
         return $this->regions[$code];
     }
     public function findAirportCodesByCityName($cityName){       //or part thereof
-        $result = array_filter($this->citys, function ($item) use ( $cityName ) {
-            if (stripos($item, $cityName) !== false) {
-                return true;
-            }
-            return false;
-        });
-        return $result; //returns an array with only the cities that match
+        global $theCityName;
+        $theCityName = $cityName;
+        return array_filter($this->citys, "testName");
     }
 
-
     public function findRegionByCityName($cityName){
-        $cityCodes = findAirportCodesByCityName($cityName);
+        $cityCodes = $this->findAirportCodesByCityName($cityName);
         foreach($cityCodes as $airportCode=>$value){
             break;
         }
@@ -7233,22 +7232,44 @@ class regionsClass extends stateClass
 
 
     public function findAirportCodesByRegionName($regionName){       //or part thereof
-        $result = array_filter($this->regions, function ($item) use ( $regionName ) {
-            if (stripos($item, $regionName) !== false) {
-                return true;
-            }
-            return false;
-        });
+        global $theCityName;
+        $theCityName = $regionName;
+        $result = array_filter($this->regions, "testName");
         return $result; //returns an array with only the regions that match
     }
 
+    /* loaded into a mysql database like this...
+     * public function loadDataBase(){
+        global $oDB;
+        if(!isset($oDB)){
+            $oDB = new db();
+        }
+
+        foreach($this->citys as $code=>$city){
+            $code=$this->cleanCode($code);
+            $city=$this->cleanCode($city);
+            $region=$this->cleanCode($this->regions[$code]);
+
+            if(mnr(dbq("SELECT code FROM `airportCodes` WHERE code='$code'"))==0){
+                dbq("INSERT INTO `airportCodes` SET code='$code', region='$region', city='$city' ");
+            }
+
+        }
+    }
+    */
+
+}
+
+function testName($item){
+    global $theCityName;
+    if (stripos($item, $theCityName) !== false) {
+        return true;
+    }
+    return false;
 }
 
 
+//$regionObj->loadDatabase();
+
 ?>
-
-
-
-
-
 

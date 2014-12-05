@@ -284,7 +284,7 @@ class statesClass
     }
 
     function findStateNameByXXCode($code){     //find the US state name by two letter code.
-        $USCode="US-".$code;
+        $USCode="US-". substr($code,0,2);
         if($this->states[$USCode]!=""){
             return $this->states[$USCode];
         }else{
@@ -303,3 +303,5 @@ class statesClass
         return preg_replace(array('/\s{2,}/', '/[\t\n\r]/'), ' ', $code);
     }
 }
+
+?>
