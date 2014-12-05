@@ -2,7 +2,7 @@
 
 include_once("states.php");
 
-class airportClass extends stateClass
+class regionsClass extends stateClass
 {
     private static $citys = array();
     private static $regions = array();

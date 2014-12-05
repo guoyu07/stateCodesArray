@@ -9,7 +9,7 @@
  */
 
 
-class stateClass
+class statesClass
 {
     private static $states = array();
     
