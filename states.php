@@ -1,4 +1,9 @@
 <?PHP
+/*
+ * Copyright Hugh Fuve 2014
+ * getState($code);   //returns a string with the full name of the state given a code
+ * getStateXX($code);   //returns a string with the full name of the state given a 2 letter code or XX on fail.
+ */
 
 
 class stateClass
