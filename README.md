@@ -17,7 +17,8 @@ PHP classes to convert ascii US state codes in a string into their full text nam
 Regions by Airport Code
 =======================
 
-This version uses a private array inside the class, I also have this whole thing working with queries on a mysql database.
+This version uses a private array inside the class, I built this to test before I made a mysql solution.
+
   Regions Class extends statesClass with citys and regions of airports all over the world, and can find the 3 letter airport codes,
   or use 3 letter airport codes to gets names of citys and regions.
 
