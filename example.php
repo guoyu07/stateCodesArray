@@ -16,7 +16,11 @@ $regionObj->construct();
 
 
 //Show the regions and cities for the airport codes
-$cityName="portland";
+if($_GET[cityname]==""){
+    $cityName="portland";
+}else{
+    $cityName=$regionObj->cleanCode($_GET[cityname]);
+}
 
 $cityCodes = $regionObj->findAirportCodesByCityName($cityName);
 
