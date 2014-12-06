@@ -47,5 +47,7 @@ findAirportCodesByXXRegionName($regionName) //Returns array of IATA 3-letter cod
 ```
 OTHER
 =========================
+```
 function testName($item)      //used to return modified and filtered arrays
 function isUpper($char)       //Tests chars for upper/lower case returns true if char is UPPER
+```
