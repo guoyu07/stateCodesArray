@@ -20,23 +20,26 @@ if($_GET[cityname]==""){
     $cityName="portland";
 }else{
     $cityName=$regionObj->cleanCode($_GET[cityname]);
+    echo "Regions and Airport codes for {$cityName}<br>";
 }
 
 if($_GET[regionname]==""){
-    $regionName="or";
+    //$regionName="or";
     $cityCodes = $regionObj->findAirportCodesByCityName($cityName);
 }else{
     $regionName= $regionObj->cleanCode($_GET[regionname]);
+    echo "Regions and Airport codes for {$regionName}<br>";
+
     $cityCodes = $regionObj->findAirportCodesByRegionName($regionName);
+
+
 }
 
-// ******** if region name is set then list the codes by region.
-
-
-echo "Regions and Airport codes for {$cityName}<br>";
 
 foreach($cityCodes as $code=>$name){
-    $region=$regionObj->findRegionByAirportCode($code);
+    $region   =$regionObj->findRegionByAirportCode($code);
+    $cityName =$regionObj->findCityByAirportCode($code);
+
     echo "Region [$code] = {$cityName}, " . $region . " ";
     if($region{2}==' ' || $region{2}==''){
         echo  "(". $regionObj->findStateNameByXXCode($region) . ")";
