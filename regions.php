@@ -24,7 +24,7 @@ class regionsClass extends statesClass
         if($this->citys['ABR'] == 'Aberdeen'){
             return;
         }
-        
+
         $this->citys['ABR'] = 'Aberdeen';
         $this->citys['ABI'] = 'Abilene';
         $this->citys['ADK'] = 'Adak Island';
@@ -7217,8 +7217,8 @@ class regionsClass extends statesClass
         return $this->regions[$code];
     }
     public function findAirportCodesByCityName($cityName){       //or part thereof
-        global $theCityName;
-        $theCityName = $cityName;
+        global $theName;
+        $theName = $cityName;
         return array_filter($this->citys, "testName");
     }
 
@@ -7230,14 +7230,29 @@ class regionsClass extends statesClass
         return $this->regions[$airportCode];
     }
 
+    public function findRegionsByCityName($cityName){
+        return  $this->findAirportCodesByCityName($cityName);
+    }
 
     public function findAirportCodesByRegionName($regionName){       //or part thereof
-        global $theCityName;
-        $theCityName = $regionName;
+        global $theName;
+        $theName = $regionName;
         $result = array_filter($this->regions, "testName");
         return $result; //returns an array with only the regions that match
     }
 
+    public function findAirportCodesByXXRegionName($regionName){       //or part thereof
+        global $theName;
+        $theName = $regionName;
+        $result = array_filter($this->regions, "testName");
+
+        foreach($result as $key=>$value){  //only keep the 2 digit codes.
+            if(strlen($value)>2){
+                unset($result[$key]);
+            }
+        }
+        return $result; //returns an array with only the regions that match
+    }
     /* loaded into a mysql database like this...
      * public function loadDataBase(){
         global $oDB;
@@ -7258,18 +7273,11 @@ class regionsClass extends statesClass
     }
     */
 
-}
 
-function testName($item){
-    global $theCityName;
-    if (stripos($item, $theCityName) !== false) {
-        return true;
-    }
-    return false;
+
 }
 
 
 //$regionObj->loadDatabase();
 
 ?>
-
