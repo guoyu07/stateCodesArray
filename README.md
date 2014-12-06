@@ -22,7 +22,7 @@ findStateFullNameByPartial($stateName); //whole name or part thereof
                                         //Returns first guess at  full name of state from partial input
 ```
 Regions by Airport Code Extends the State Codes Class
-=======================
+-------------------------
 
 This version uses a private array inside the class, I built this to test before I made a mysql solution.
 
@@ -46,7 +46,7 @@ findAirportCodesByXXRegionName($regionName) //Returns array of IATA 3-letter cod
                                             //(Major State US airports)
 ```
 OTHER
-=========================
+---------------------------
 ```
 function testName($item)      //used to return modified and filtered arrays
 function isUpper($char)       //Tests chars for upper/lower case returns true if char is UPPER
