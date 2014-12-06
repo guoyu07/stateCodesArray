@@ -22,7 +22,16 @@ if($_GET[cityname]==""){
     $cityName=$regionObj->cleanCode($_GET[cityname]);
 }
 
-$cityCodes = $regionObj->findAirportCodesByCityName($cityName);
+if($_GET[regionname]==""){
+    $regionName="or";
+    $cityCodes = $regionObj->findAirportCodesByCityName($cityName);
+}else{
+    $regionName= $regionObj->cleanCode($_GET[regionname]);
+    $cityCodes = $regionObj->findAirportCodesByRegionName($regionName);
+}
+
+// ******** if region name is set then list the codes by region.
+
 
 echo "Regions and Airport codes for {$cityName}<br>";
 
