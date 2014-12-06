@@ -5,14 +5,29 @@ PHP classes to convert ascii US state codes in a string into their full text nam
 ===============
 
 === USAGE
-  $statesObj = new statesClass();
-
-  $statesObj->findStateNameByCode($strCode);   //returns full text of state.
-  
-  $statesObj->findStateNameByXXCode($strCode); //returns the full text from a 2 letter state code.
-
-  $strCode = $statesObj->cleanCode($strCode){  //strips double spaces and []()tabs and linefeeds
-
+| <b>Function</b>     | <b>Descrioption</b> |
+|:-------------------------------------------------------|:---------------------------------------------------------------------|
+|$statesObj = new statesClass(); | |
+|public function  findStateNameByCode($strCode);| returns full text of state.|
+|:-------------------------------------------------------|:---------------------------------------------------------------------|
+|public function  findStateNameByXXCode($strCode);|returns the full text from a 2 letter state code.|
+|:-------------------------------------------------------|:---------------------------------------------------------------------|
+|public function  cleanCode($strCode) |strips double spaces and []()tabs and linefeeds |
+| |and sanitizes against $_GET attacks.|
+|:-------------------------------------------------------|:---------------------------------------------------------------------|
+|public function findStateCodesByName($stateName)|input whole name or partial name|
+| |returns an array with the XX state codes that match|
+| |$result['xx'] will contain the best guess 2 digit code|
+| |$result['fullname'] will contain the best guess full name|
+| |returns blank results in [xx] if no match|
+|:-------------------------------------------------------|:---------------------------------------------------------------------|
+|public function findStateCodeByName($stateName)|whole name or part thereof|
+| |Returns the XX 2 digit state code if there is a match|
+| |Else returns empty string|
+|:-------------------------------------------------------|:---------------------------------------------------------------------|
+|public function findStateFullNameByPartial($stateName)|whole name or part thereof|
+| |Returns first guess at the full name of a state from partial input|
+|:-------------------------------------------------------|:---------------------------------------------------------------------|
 
 Regions by Airport Code
 =======================
@@ -29,3 +44,10 @@ This version uses a private array inside the class, I built this to test before 
   $regionsObj->findRegionByCityName($cityName);            //takes part of a city name to return the first match as region name.
   $regionsObj->findAirportCodesByRegionName($regionName);  //takes part of a region name and returns first match airport Code.
   $regionsObj->findAirportCodesByCityName($cityName);      //takes part of a city name and returns first match airport Code.
+  $regionsObj->findRegionsByCityName($cityName);           //returns an array of airportcodes that match the city name
+  $regionsObj->findAirportCodesByXXRegionName($regionName) //Returns 3 digit codes but only where named by a 2 digit code (Major state US airports)
+
+OTHER
+=========================
+function testName($item)      //used to return modified and filtered arrays
+function isUpper($char)       //Tests chars for upper/lower case returns true if char is UPPER
